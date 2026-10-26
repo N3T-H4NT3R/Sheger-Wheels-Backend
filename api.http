@@ -1,0 +1,64 @@
+POST http://localhost:8000/api/v1/user/login/
+Content-Type: application/json
+Authorization: Bearer YOUR_ACCESS_TOKEN
+
+{
+    "username": "Heran",
+    "password": "12121212"
+}
+###
+POST http://localhost:8000/api/v1/user/login/
+Content-Type: application/json
+Authorization: Bearer YOUR_ACCESS_TOKEN
+
+{
+    "username": "Nahoom",
+    "password": "12121212"
+}
+
+###
+POST http://localhost:8000/api/v1/cars/
+Content-Type: application/json
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ0b2tlbl90eXBlIjoiYWNjZXNzIiwiZXhwIjoxNzkzMDQ0MjYyLCJpYXQiOjE3OTMwNDM5NjIsImp0aSI6IjI5YWRlN2YzMDgxNjQwOGU5MzFiNzU2MWE1ZWMxYzA5IiwidXNlcl9pZCI6IjEifQ.VXIAqE-7wOJaCE6wXVSh5ajlN6kqOkRl7pUXgxfpeZ8
+
+{
+    "make": "Hyundai",
+    "model": "h-001",
+    "year": 2005,
+    "fuel_type": "electric",
+    "transmission": "automatic",
+    "seats": 5,
+    "color": "Black",
+    "body_type": "test body",
+    "description": "test cars",
+    "city": "Addis Ababa",
+    "price_per_day": "2000.00",
+    "mileage": 5000
+}
+
+###
+POST http://localhost:8000/api/v1/books/
+Content-Type: application/json
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ0b2tlbl90eXBlIjoiYWNjZXNzIiwiZXhwIjoxNzkzMDQ4Njk4LCJpYXQiOjE3OTMwNDY4OTgsImp0aSI6IjMxZjI1Y2E3ZDk5ZTQ3Zjk4NThlZWYwZjAxNTY0NDNlIiwidXNlcl9pZCI6IjMifQ.2Eb7TWXbKquPwo0MVy28rLzgloHvWhNURE5AAQ8LlZ0
+
+  {
+    "start_date": "2026-10-26",
+    "end_date": "2026-11-01",
+    "car": 4
+  }
+
+###
+GET http://localhost:8000/api/v1/user/refunded/
+Content-Type: application/json
+# Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ0b2tlbl90eXBlIjoiYWNjZXNzIiwiZXhwIjoxNzkzMDQ4NjY0LCJpYXQiOjE3OTMwNDY4NjQsImp0aSI6IjY1MmNmYzBiMjBiODRhMWViMTkwMmI4OWY1NTk3MjM1IiwidXNlcl9pZCI6IjQifQ.DmLsLNmJks5m9OkPR_i27n-jvsFWAZouKMgCyaj83rM
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ0b2tlbl90eXBlIjoiYWNjZXNzIiwiZXhwIjoxNzkzMDQ4Njk4LCJpYXQiOjE3OTMwNDY4OTgsImp0aSI6IjMxZjI1Y2E3ZDk5ZTQ3Zjk4NThlZWYwZjAxNTY0NDNlIiwidXNlcl9pZCI6IjMifQ.2Eb7TWXbKquPwo0MVy28rLzgloHvWhNURE5AAQ8LlZ0
+
+###
+POST http://localhost:8000/api/v1/user/rechareg/
+Content-Type: application/json
+# Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ0b2tlbl90eXBlIjoiYWNjZXNzIiwiZXhwIjoxNzkzMDQ4NjY0LCJpYXQiOjE3OTMwNDY4NjQsImp0aSI6IjY1MmNmYzBiMjBiODRhMWViMTkwMmI4OWY1NTk3MjM1IiwidXNlcl9pZCI6IjQifQ.DmLsLNmJks5m9OkPR_i27n-jvsFWAZouKMgCyaj83rM
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ0b2tlbl90eXBlIjoiYWNjZXNzIiwiZXhwIjoxNzkzMDQ4Njk4LCJpYXQiOjE3OTMwNDY4OTgsImp0aSI6IjMxZjI1Y2E3ZDk5ZTQ3Zjk4NThlZWYwZjAxNTY0NDNlIiwidXNlcl9pZCI6IjMifQ.2Eb7TWXbKquPwo0MVy28rLzgloHvWhNURE5AAQ8LlZ0
+
+{
+    "code": "5M6MX7LT6AW7MU"
+}
