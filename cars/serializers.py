@@ -1,18 +1,38 @@
-from .models import Car
+from .models import Car, CarImage
 from datetime import date
 from rest_framework import serializers
 
 
 
-class CarSerializer(serializers.ModelSerializer):
+class CarImageSerializer(serializers.ModelSerializer):
+    image = serializers.SerializerMethodField()
 
+    class Meta:
+        model = CarImage
+        fields = ["id", "image"]
+
+    def get_image(self, obj):
+        request = self.context.get("request")
+
+        if not obj.image:
+            return None
+
+        url = obj.image.url
+
+        if request:
+            return request.build_absolute_uri(url)
+
+        return url
+
+class CarSerializer(serializers.ModelSerializer):
+    images = CarImageSerializer(many=True, read_only=True)
     owner = serializers.ReadOnlyField(source="owner.id")
 
     class Meta:
         model = Car
         fields = "__all__"
 
-        read_only_fields = ["id", "owner", "status"]
+        read_only_fields = ["id", "owner", "images", "status"]
 
     def validate_year(self, value):
         current_year = date.today().year
