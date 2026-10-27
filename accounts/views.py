@@ -1,10 +1,15 @@
+from django.db.models import F
 from django.db import transaction
-from .models import Balance_Recharge
 from rest_framework.views import APIView
 from rest_framework import generics, status
 from rest_framework.response import Response
+from .models import Balance_Recharge, UserBalance
 from rest_framework.permissions import IsAuthenticated
-from .serializers import SignupSerializer, BalanceRechargeSerializer
+from .serializers import SignupSerializer, BalanceRechargeSerializer, ProfileSerializer
+from django.contrib.auth import get_user_model
+
+User = get_user_model()
+
 
 
 
@@ -26,6 +31,13 @@ class SignupView(generics.CreateAPIView):
         )
 
 
+class Profile(generics.ListAPIView):
+    serializer_class = ProfileSerializer
+    permission_classes = [IsAuthenticated]
+
+    def get_queryset(self):
+        return User.objects.filter(id=self.request.user.id)
+
 class Refunded(generics.ListAPIView):
     serializer_class = BalanceRechargeSerializer
     permission_classes = [IsAuthenticated]
@@ -34,6 +46,7 @@ class Refunded(generics.ListAPIView):
         return Balance_Recharge.objects.filter(
             user=self.request.user
         ).order_by("-id")
+
 
 class RechargeBalance(APIView):
     permission_classes = [IsAuthenticated]
@@ -60,13 +73,23 @@ class RechargeBalance(APIView):
                     status=status.HTTP_400_BAD_REQUEST
                 )
 
+            balance, created = UserBalance.objects.get_or_create(
+                user=request.user,
+                defaults={"balance": 0}
+            )
+
+            UserBalance.objects.filter(pk=balance.pk).update(
+                balance=F("balance") + ticket.balance
+            )
+
+            amount = ticket.balance
             ticket.is_used = True
             ticket.save(update_fields=["is_used"])
 
         return Response(
             {
                 "message": "Ticket redeemed successfully.",
-                "amount": str(ticket.balance)
+                "amount": str(amount),
             },
             status=status.HTTP_200_OK
         )

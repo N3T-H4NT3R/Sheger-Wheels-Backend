@@ -24,6 +24,14 @@ class SignupSerializer(serializers.ModelSerializer):
         )
         return user
 
+
+class ProfileSerializer(serializers.ModelSerializer):
+    balance = serializers.DecimalField(source="balance_account.balance", max_digits=12, decimal_places=2, read_only=True)
+
+    class Meta:
+        model = User
+        fields = ["email", "username", "first_name", "last_name", "balance"]
+
 class BalanceRechargeSerializer(serializers.ModelSerializer):
     class Meta:
         model = Balance_Recharge

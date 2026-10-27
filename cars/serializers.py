@@ -12,7 +12,7 @@ class CarSerializer(serializers.ModelSerializer):
         model = Car
         fields = "__all__"
 
-        read_only_fields = ["id", "owner", "status", "created_at", "updated_at",]
+        read_only_fields = ["id", "owner", "status"]
 
     def validate_year(self, value):
         current_year = date.today().year

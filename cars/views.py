@@ -12,7 +12,7 @@ class CarListCreateView(generics.ListCreateAPIView):
     def get_queryset(self):
         return Car.objects.filter(
             status=Car.CarStatus.AVAILABLE
-        ).order_by("-created_at")
+        )
 
     def get_permissions(self):
         if self.request.method == "POST":
@@ -25,6 +25,15 @@ class CarListCreateView(generics.ListCreateAPIView):
             status=Car.CarStatus.PENDING
         )
 
+
+class OwnerCarListView(generics.ListAPIView):
+    serializer_class = CarSerializer
+    permission_classes = [permissions.IsAuthenticated]
+
+    def get_queryset(self):
+        return Car.objects.filter(
+            owner=self.request.user
+        ).order_by("-id")
 
 class CarDetailView(generics.RetrieveUpdateDestroyAPIView):
     queryset = Car.objects.all()
